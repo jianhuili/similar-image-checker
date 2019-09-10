@@ -11,20 +11,23 @@
 
     1. 在应用的根目录下，执行以下命令：
 
-        python3 run_test.py
+        python3 run_check2.py -s 15 img_dir
 
-## 测试数据及结果说明
+        * -s    : 相似度阀值参数（默认值：15），照片的特征相似度值大于或等于该值时标示为需要确认照片
+        * img_dir: 需要检测的照片的保存路径
 
-    1. 结果说明：
-        1. 控制台输出的为照片与基准照片的相似度
-        2. 照片检测采用了两种不同的算法验证:
-            Feature算法 — 值越大越相似。最小为0，最大为100（完全相同)
-            Hash算法    - 值越小越相似。最小为0(完全相同)
+## 检测结果报告说明
 
-    2. 测试数据说明：
-        - data\base_image.jpg为基准照片
-        - data\check_data\same.jpg -> 未做任何修改的照片
-        - data\check_data\cut.jpg -> 做了剪切处理的照片
-        - data\check_data\resize.jpg -> 调整尺寸的照片
-        - data\check_data\gammar_adjust.jpg -> 调整了图像Gammar曲线的照片
-        - data\check_data\other_x.jpg -> 其他不同的照片
+    1. 检测结果报告的输出目录为results
+
+    2. 检测结果报告包括以下两个部分：
+        1. 检测结果报告文件 - result_report_yyyymmddHHMMss.csv
+           - “是否为相似照片状态”列说明
+                YES    : 源图片与比较图片为同一图片
+                CONFIRM: 源图片与比较图片为疑似同一场景的图片，需要人工确认
+                NO     : 源图片与比较图片为为不同场景图片
+           
+        2. 相似照片的待确认数据
+           - 相似照片的待确认数据自动输出到以下目录
+              results/similar_images/
+           - 同一组相似照片归类放置在同一子目录，子目录名称与检测结果报告中的“分组编号”一致

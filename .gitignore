@@ -1,2 +1,5 @@
 .DS_Store
 __pycache__
+user_data/
+*.csv
+.pytest_cache
